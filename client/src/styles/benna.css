@@ -1,0 +1,71 @@
+/* ───────── Benna : carnet de collage + plan de Tunis ───────── */
+.benna { --kraft: #e9dcc3; height: calc(100vh - var(--nav-h)); min-height: 560px; display: grid; grid-template-columns: minmax(340px, 30rem) minmax(0, 1fr); background: var(--kraft); position: relative; overflow: hidden; }
+.benna__tabs { display: none; }
+.sticker-title { font-family: "Titan One", var(--font-display); font-weight: 400; font-size: clamp(2.2rem, 4vw, 3.2rem); line-height: 1; color: #fff; letter-spacing: .02em; -webkit-text-stroke: 7px var(--rouge); paint-order: stroke fill; text-shadow: 0 5px 0 rgba(120,20,30,.35); transform: rotate(-2deg); display: inline-block; margin: 0; }
+.sticker-title .ar { font-family: var(--font-ar); -webkit-text-stroke: 5px var(--bleu); }
+.sticker-title.sm { font-size: 1.7rem; -webkit-text-stroke: 5px var(--bleu); }
+
+.book { padding: 1.2rem 1.4rem 1rem; display: flex; flex-direction: column; gap: .8rem; overflow-y: auto; background:
+  radial-gradient(circle at 20% 10%, rgba(255,255,255,.4), transparent 50%), var(--kraft); border-right: 6px double rgba(90,60,30,.25); }
+.book__head p { font-family: "Caveat", cursive; font-size: 1.35rem; color: #5a4630; margin-top: .6rem; line-height: 1.1; }
+.paper { position: relative; background-color: #f6f1e4; border-radius: 6px 16px 16px 6px; padding: 1.2rem 1.1rem .9rem 1.6rem; box-shadow: inset 2.2rem 0 1.6rem -1.6rem rgba(70,55,35,.35), 0 12px 24px -12px rgba(60,40,20,.45); background-image: radial-gradient(120% 90% at 50% 40%, rgba(255,255,255,.55), transparent 70%); animation: turn .55s cubic-bezier(.3,.7,.2,1); transform-origin: left center; }
+.paper[data-dir="-1"] { animation-name: turn-back; }
+@keyframes turn { from { transform: perspective(1200px) rotateY(-62deg); opacity: .2; } }
+@keyframes turn-back { from { transform: perspective(1200px) rotateY(48deg); opacity: .2; } }
+.paper::before { content: ""; position: absolute; left: .55rem; top: 1rem; bottom: 1rem; width: 7px; background: radial-gradient(circle, #9a8b72 0 2.5px, transparent 3px) 0 0 / 7px 28px; }
+.paper__t { font-family: "Homemade Apple", cursive; font-size: 1.15rem; color: #3b2d1d; margin-bottom: .9rem; font-weight: 400; }
+.stickers { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.1rem .9rem; }
+.stk { position: relative; border: 0; background: none; padding: 0; display: grid; gap: .3rem; justify-items: center; transform: rotate(var(--r)); transition: transform .2s; }
+.stk:hover, .stk.is-on { transform: rotate(0) scale(1.06); z-index: 2; }
+.stk__img { width: 100%; aspect-ratio: 1; border-radius: 50%; background: radial-gradient(circle, #fff 0 61%, #efebe3 63%, #fff 67%, #fbfaf7 86%, #e6e1d6 100%); box-shadow: 0 0 0 .3rem #fff, 0 .45rem .9rem rgba(60,40,20,.3); display: grid; place-items: center; overflow: hidden; padding: 10%; }
+.stk__img img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
+.stk__em { font-size: 3.2rem; width: 100%; height: 100%; display: grid; place-items: center; border-radius: 50%; background: var(--c); }
+.stk__n { font-family: "Titan One", var(--font-display); font-size: 1rem; color: #fff; -webkit-text-stroke: 4px #3b2d1d; paint-order: stroke fill; margin-top: .45rem; line-height: 1; }
+.stk__p { font-family: "Caveat", cursive; font-size: 1.15rem; color: #5a4630; line-height: 1; }
+.stk.is-on .stk__img { box-shadow: 0 0 0 .3rem var(--rouge), 0 .6rem 1.1rem rgba(60,40,20,.4); }
+.tape { position: absolute; top: -.35rem; left: 50%; width: 3.4rem; height: 1.1rem; background: rgba(255, 224, 140, .75); transform: translateX(-50%) rotate(-4deg); z-index: 2; box-shadow: 0 1px 2px rgba(0,0,0,.15); }
+.stk:nth-child(even) .tape { background: rgba(190, 225, 235, .8); transform: translateX(-50%) rotate(5deg); }
+.paper__nav { display: flex; justify-content: space-between; align-items: center; margin-top: 1rem; }
+.dots { display: flex; gap: .4rem; } .dots button { width: .7rem; height: .7rem; border-radius: 50%; border: 0; background: #cbbd9e; padding: 0; } .dots button.on { background: var(--rouge); transform: scale(1.3); }
+.clear { align-self: start; }
+.book__note { font-size: .8rem; color: #7a6850; margin-top: auto; }
+
+.plan { position: relative; min-width: 0; min-height: 0; }
+.map { position: absolute; inset: 0; touch-action: none; cursor: grab; background: #f4f0e7; }
+.map:active { cursor: grabbing; }
+.map svg { width: 100%; height: 100%; display: block; }
+.pin { cursor: pointer; }
+.pin .lab { opacity: 0; transition: opacity .15s; pointer-events: none; }
+.pin:hover .lab, .pin.hot .lab, .pin:focus .lab { opacity: 1; }
+.pin.hot, .pin:focus { outline: none; }
+.pin-in { transform-box: fill-box; transform-origin: 50% 100%; animation: drop .6s cubic-bezier(.3,1.6,.5,1) both; }
+@keyframes drop { 0% { opacity: 0; transform: translateY(-70px) scale(.6); } 100% { opacity: 1; transform: none; } }
+.zoom { position: absolute; right: .8rem; top: .8rem; display: grid; gap: .3rem; }
+.zoom button { width: 2.4rem; height: 2.4rem; border-radius: 10px; border: 0; background: #fff; box-shadow: var(--shadow-s); font-size: 1.4rem; font-weight: 700; }
+.plan__list { position: absolute; left: .8rem; bottom: .8rem; right: 4.5rem; list-style: none; margin: 0; padding: 0; display: flex; gap: .6rem; overflow-x: auto; scrollbar-width: thin; padding-bottom: .3rem; }
+.scard { display: flex; gap: .6rem; align-items: center; text-align: left; background: #fff; border: 0; border-radius: 14px; padding: .5rem .8rem .5rem .5rem; box-shadow: var(--shadow); min-width: 13.5rem; }
+.scard__th { width: 2.6rem; height: 2.6rem; border-radius: 10px; display: grid; place-items: center; background: linear-gradient(135deg, var(--a, #f3d9c6), var(--b, #fff)); font-family: "Titan One"; font-size: 1.2rem; color: #3b2d1d; flex: none; }
+.scard b { display: block; line-height: 1.1; } .scard small { color: var(--muted); }
+i.ok { color: var(--ok); font-style: normal; font-weight: 700; } i.ko { color: var(--rouge); font-style: normal; font-weight: 700; }
+
+.sheet { position: absolute; right: .8rem; top: .8rem; bottom: .8rem; width: min(25rem, calc(100% - 1.6rem)); background: #fffdf8; border-radius: 20px; box-shadow: 0 20px 50px -12px rgba(30,20,10,.5); display: flex; flex-direction: column; overflow: hidden; z-index: 5; animation: sheet-in .35s cubic-bezier(.3,.9,.3,1); }
+@keyframes sheet-in { from { transform: translateX(30px); opacity: 0; } }
+.sheet__h { position: relative; padding: 1.1rem 1.2rem .8rem; background: linear-gradient(135deg, var(--a, #f3d9c6), var(--b, #fff)); display: grid; gap: .4rem; }
+.sheet__h p { font-size: .9rem; } .sheet__v { font-family: "Caveat", cursive; font-size: 1.25rem; line-height: 1.1; color: #3b2d1d; }
+.sheet__x { position: absolute; right: .7rem; top: .7rem; width: 2.2rem; height: 2.2rem; border-radius: 50%; border: 0; background: rgba(255,255,255,.85); font-weight: 800; }
+.sheet .tabs { margin: 0; padding: 0 .6rem; } .sheet .tabs button { padding: .6rem .7rem; }
+.sheet__b { padding: 1rem 1.2rem; overflow-y: auto; flex: 1; display: grid; gap: .8rem; align-content: start; }
+.sheet__f { padding: .8rem 1.2rem 1rem; border-top: 1px solid var(--line); }
+.menu h3 { font-family: "Homemade Apple", cursive; font-size: 1rem; font-weight: 400; margin-bottom: .3rem; }
+.menu p { display: flex; gap: .4rem; align-items: baseline; margin: .15rem 0; } .menu p i { flex: 1; border-bottom: 2px dotted #cbbd9e; transform: translateY(-3px); }
+
+@media (max-width: 900px) {
+  .benna { grid-template-columns: 1fr; grid-template-rows: auto minmax(0, 1fr); }
+  .benna__tabs { display: flex; background: #fff; border-bottom: 1.5px solid var(--line); z-index: 6; }
+  .benna__tabs button { flex: 1; border: 0; background: none; padding: .8rem; font-weight: 800; border-bottom: 4px solid transparent; }
+  .benna__tabs button[aria-selected="true"] { border-bottom-color: var(--rouge); color: var(--rouge); }
+  .benna[data-view="carnet"] .plan, .benna[data-view="carte"] .book { display: none; }
+  .book { border-right: 0; }
+  .sheet { left: .5rem; right: .5rem; top: auto; bottom: .5rem; width: auto; max-height: 72%; }
+  .plan__list { right: 4rem; }
+}

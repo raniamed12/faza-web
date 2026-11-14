@@ -1,0 +1,102 @@
+/* ───────── Pages ───────── */
+/* Accueil : la carte vivante */
+.hero { background: var(--bleu); color: #fff; position: relative; overflow: hidden; padding: clamp(2rem, 5vw, 4rem) 0 clamp(2.5rem, 5vw, 4rem); }
+.hero::before { content: ""; position: absolute; inset: 0; background: radial-gradient(60% 70% at 78% 40%, rgba(43,106,163,.55), transparent 70%), repeating-linear-gradient(45deg, transparent 0 22px, rgba(234,217,181,.045) 22px 23px); }
+.hero__grid { position: relative; display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); grid-template-areas: "txt map" "txt ticket"; gap: 1.5rem 3rem; align-items: center; }
+.hero__txt { grid-area: txt; display: grid; gap: 1.3rem; align-content: center; }
+.hero__ar { font-size: clamp(2rem, 4vw, 3rem); color: var(--sable); line-height: 1; }
+.hero .h-xl { font-size: clamp(2.8rem, 6.2vw, 5.4rem); }
+.hero__nw { display: block; color: var(--sable); }
+.hero .lead { color: rgba(250,245,234,.86); max-width: 32rem; }
+.moods { display: flex; flex-wrap: wrap; gap: .5rem; max-width: 34rem; }
+.mood { display: inline-flex; gap: .5rem; align-items: baseline; border: 1.5px solid rgba(234,217,181,.45); background: rgba(255,255,255,.06); color: #fff; border-radius: 999px; padding: .5rem 1rem; font-weight: 700; transition: background .2s, transform .15s; }
+.mood .ar { font-size: .95rem; color: var(--sable); }
+.mood:hover { background: rgba(255,255,255,.16); }
+.mood[aria-pressed="true"] { background: var(--sable); color: var(--bleu); border-color: var(--sable); transform: translateY(-2px) rotate(-1deg); }
+.mood[aria-pressed="true"] .ar { color: var(--terra-2); }
+.hero__cta { display: flex; flex-wrap: wrap; gap: .7rem; }
+.hero__map { grid-area: map; position: relative; max-width: 420px; justify-self: center; width: 100%; }
+.hero .tmap__region { stroke: var(--bleu); }
+.hero .tmap__region.is-selected { fill: var(--rouge); stroke: #fff; }
+.hero .tmap__labels text { fill: var(--bleu); stroke: rgba(250,245,234,.7); }
+.hero .tmap__labels text.is-sel { fill: #fff; stroke: var(--rouge); }
+.maptip { position: absolute; transform: translate(12px, -110%); background: var(--papier); color: var(--ink); border-radius: 10px; padding: .45rem .75rem; box-shadow: var(--shadow); pointer-events: none; display: grid; font-size: .92rem; z-index: 5; white-space: nowrap; }
+.maptip small { color: var(--muted); }
+.legend { display: flex; align-items: center; gap: .5rem; font-size: .8rem; color: rgba(250,245,234,.8); margin-top: .5rem; justify-content: center; }
+.legend i { width: 6rem; height: .5rem; border-radius: 4px; background: linear-gradient(90deg, var(--sable), var(--terra)); }
+.ticket { grid-area: ticket; background: var(--papier); color: var(--ink); border-radius: var(--r-lg); display: grid; grid-template-columns: 9rem 1fr; overflow: hidden; max-width: 34rem; justify-self: center; width: 100%; box-shadow: 0 18px 40px -16px rgba(0,0,0,.5); position: relative; }
+.ticket::before { content: ""; position: absolute; left: 9rem; top: 0; bottom: 0; border-left: 3px dotted var(--line); }
+.ticket__scene { min-height: 100%; } .ticket__body { padding: 1rem 1.2rem 1.2rem; display: grid; gap: .45rem; }
+.ticket__reg { font-size: .82rem; color: var(--terra-2); font-weight: 800; }
+.ticket__counts { list-style: none; padding: 0; margin: .3rem 0; display: flex; flex-wrap: wrap; gap: .3rem .9rem; font-size: .9rem; }
+@media (max-width: 960px) { .hero__grid { grid-template-columns: 1fr; grid-template-areas: "txt" "map" "ticket"; } .hero__map { max-width: 360px; } }
+@media (max-width: 520px) { .ticket { grid-template-columns: 5.5rem 1fr; } .ticket::before { left: 5.5rem; } }
+
+/* Les six portes */
+.doors-sec { background: var(--sable-2); }
+.doors { display: grid; grid-template-columns: repeat(6, 1fr); gap: 1.2rem; }
+.door { text-decoration: none; display: grid; justify-items: center; gap: .3rem; text-align: center; animation: door-in .6s both; animation-delay: var(--d); }
+.door__arch { position: relative; width: 100%; aspect-ratio: .72; background: var(--c); border-radius: 999px 999px 10px 10px; border: 6px solid #fff; box-shadow: 0 0 0 3px var(--c), var(--shadow); display: grid; place-items: center; overflow: hidden; transition: transform .25s, box-shadow .25s; }
+.door__arch::before { content: ""; position: absolute; inset: 10% 14% 8% 14%; border-radius: 999px 999px 4px 4px; border: 2px solid rgba(255,255,255,.35); }
+.door__arch::after { content: ""; position: absolute; left: 50%; top: 14%; bottom: 0; border-left: 2px solid rgba(255,255,255,.35); }
+.door__studs { position: absolute; inset: 14% 18% 10%; display: grid; grid-template-columns: repeat(4, 1fr); align-content: space-evenly; justify-items: center; }
+.door__studs i { width: 5px; height: 5px; border-radius: 50%; background: rgba(255,255,255,.55); }
+.door__ar { position: relative; z-index: 1; color: #fff; font-size: clamp(1.2rem, 2vw, 1.7rem); background: var(--c); padding: .2rem .5rem; border-radius: 8px; line-height: 1.2; }
+.door:hover .door__arch, .door:focus-visible .door__arch { transform: translateY(-8px) rotate(-1.5deg); box-shadow: 0 0 0 3px var(--c), 0 22px 30px -14px rgba(14,47,79,.55); }
+.door:hover .door__arch::after { border-color: rgba(255,255,255,.9); animation: door-open .5s forwards; }
+.door__name { font-family: var(--font-display); font-weight: 800; font-size: 1.1rem; margin-top: .6rem; color: var(--ink); }
+.door__fr { color: var(--muted); font-size: .9rem; }
+@keyframes door-in { from { opacity: 0; transform: translateY(24px); } }
+@keyframes door-open { to { border-left-width: 6px; } }
+@media (max-width: 960px) { .doors { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 520px) { .doors { grid-template-columns: repeat(2, 1fr); gap: 1rem; } }
+
+/* Aperçu FAZA MIX */
+.teaser { background: var(--bleu); color: #fff; }
+.teaser .lead { color: rgba(250,245,234,.85); margin: .6rem 0 1.2rem; }
+.teaser__grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; }
+.range { display: grid; gap: .5rem; margin-bottom: 1.2rem; font-weight: 650; }
+input[type="range"] { width: 100%; accent-color: var(--terra); height: 1.6rem; }
+.teaser .tl__name { color: #fff; } .teaser .tl__slot { color: var(--sable); }
+@media (max-width: 860px) { .teaser__grid { grid-template-columns: 1fr; gap: 1.5rem; } }
+.gems { background: linear-gradient(var(--papier), var(--sable-2)); }
+
+/* Gouvernorat */
+.ghero { position: relative; height: clamp(18rem, 36vw, 26rem); color: #fff; overflow: hidden; display: flex; align-items: end; }
+.ghero > .scene { position: absolute; inset: 0; }
+.ghero__shade { position: absolute; inset: 0; background: linear-gradient(transparent 20%, rgba(14,47,79,.88)); }
+.ghero__in { position: relative; padding-bottom: 2rem; display: grid; gap: .8rem; }
+.ghero__reg { font-weight: 800; color: var(--sable); }
+.ghero .lead { color: rgba(255,255,255,.9); }
+.gsplit { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: 1.5rem; align-items: start; }
+.gsplit__map { position: sticky; top: calc(var(--nav-h) + 1rem); }
+@media (max-width: 960px) { .gsplit { grid-template-columns: 1fr; } .gsplit__map { position: static; order: -1; } }
+
+/* Explorer */
+.explorer__grid { display: grid; grid-template-columns: 18rem minmax(0, 1fr); gap: 2rem; align-items: start; }
+.filters { display: grid; gap: 1rem; position: sticky; top: calc(var(--nav-h) + 1rem); background: var(--papier-2); border: 1.5px solid var(--line); border-radius: var(--r-lg); padding: 1.1rem; }
+.filters__map { max-width: 190px; margin: .3rem auto 0; text-align: center; }
+.viewbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
+@media (max-width: 960px) { .explorer__grid { grid-template-columns: 1fr; } .filters { position: static; } }
+
+/* Fiche lieu */
+.place__grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 2rem; align-items: start; }
+.place__img { position: relative; aspect-ratio: 16/11; border-radius: var(--r-lg); overflow: hidden; }
+@media (max-width: 860px) { .place__grid { grid-template-columns: 1fr; } }
+
+/* FAZA MIX */
+.mix__grid { display: grid; grid-template-columns: 22rem minmax(0, 1fr); gap: 2rem; align-items: start; }
+.mixform { display: grid; gap: 1rem; background: var(--papier-2); border: 1.5px solid var(--line); border-radius: var(--r-lg); padding: 1.2rem; position: sticky; top: calc(var(--nav-h) + 1rem); }
+@media (max-width: 960px) { .mix__grid { grid-template-columns: 1fr; } .mixform { position: static; } }
+
+/* Communauté / proposer */
+.comm__grid { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); gap: 2.5rem; align-items: start; }
+@media (max-width: 960px) { .comm__grid { grid-template-columns: 1fr; } }
+.propose { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: start; }
+.propose__col { display: grid; gap: 1rem; align-content: start; }
+@media (max-width: 960px) { .propose { grid-template-columns: 1fr; } }
+
+/* Connexion */
+.authpage { display: grid; place-items: start center; }
+.authcard { width: min(30rem, 100%); background: var(--papier-2); border: 1.5px solid var(--line); border-radius: var(--r-lg); padding: clamp(1.4rem, 4vw, 2.2rem); box-shadow: var(--shadow); }
+.authcard form { display: grid; gap: 1rem; }
