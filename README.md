@@ -1,7 +1,7 @@
 # FAZA — فازة · La Tunisie à ta façon
 
-Projet web — Objectif 3 (front end complet + back end minimal avec authentification).
-Groupe X : Rania Mediouni, Nour Elhadj. Cours : Dr. Maroua Nouioua.
+ (front end complet + back end minimal avec authentification).
+Equipe: Rania Mediouni, Nour Elhadj. Cours : Dr. Maroua Nouioua.
 
 ## 1. Le site en bref
 Guide collaboratif de la Tunisie : dormir (**Win nbatou ?**), manger (**Benna**), sortir (**Win nemchiw ?**),
