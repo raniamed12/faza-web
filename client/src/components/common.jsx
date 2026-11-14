@@ -62,7 +62,7 @@ export const Footer = () => (
     <div className="footer__band" aria-hidden="true"><Zellige opacity={0.22} size={48} /></div>
     <div className="wrap">
       <div className="footer__top">
-        <p className="footer__big">Yezzi mel <s>scroll</s>, <em>ayya nkharjou !</em></p>
+        <p className="footer__big">Yezzi mel <s>scroll</s>, <em>aya nokhrjou !</em></p>
         <Link to="/mix" className="btn btn--terra">Créer mon programme</Link>
       </div>
       <div className="footer__grid">
