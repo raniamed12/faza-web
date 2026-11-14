@@ -1,0 +1,3 @@
+/* Styles globaux propres à la version Angular (les styles d’origine sont dans src/styles/). */
+/* Les composants hôtes « décoratifs » ne doivent pas casser la mise en page. */
+faza-toasts, faza-header, faza-footer, faza-marquee { display: contents; }

@@ -1,0 +1,76 @@
+@if (res.loading() && !res.data()) { <faza-loading /> }
+@else if (res.error()) { <faza-error [error]="res.error()" /> }
+@else if (res.data(); as d) {
+  @let p = d.place;
+  <div class="wrap section place">
+    <nav class="crumbs" aria-label="Fil d’Ariane"><a routerLink="/explorer">Explorer</a> / <a [routerLink]="['/gouvernorat', p.gov.slug]">{{ p.gov.name }}</a> / {{ p.name }}</nav>
+    @if (p.status === "pending") { <p class="notice">Ce lieu est en attente de validation par l’équipe.</p> }
+    <div class="place__grid">
+      <div>
+        <div class="place__img"><faza-place-visual [place]="p" /><span class="pcard__rub" [style.background]="rub().color">{{ rub().name }}</span></div>
+        @if (d.photos.length > 0) {
+          <div class="gallery">@for (u of d.photos; track u) { <img [src]="u" [alt]="'Photo de ' + p.name + ' par la communauté'" loading="lazy" /> }</div>
+        }
+      </div>
+      <div>
+        <h1 class="h-lg">{{ p.name }} <faza-fav [place]="p" /></h1>
+        <p class="muted" style="margin: .4rem 0 1rem">{{ p.gov.name }} · {{ priceFrom(p.price) }} par personne (indicatif)@if (p.rating) { · <faza-stars [value]="p.rating" /> {{ p.rating }} ({{ p.reviewCount }})}</p>
+        <p class="place__desc">{{ p.description }}</p>
+        <div class="pcard__tags" style="margin: 1rem 0">@for (t of p.tags; track t) {<span class="tag">{{ tagLabel[t] || t }}</span>}@if (p.isGem) {<span class="tag">pépite</span>}</div>
+        <dl class="facts">
+          <div><dt>💰 Budget</dt><dd>{{ priceFrom(p.price) }} <small>par personne</small></dd></div>
+          <div><dt>📍 Gouvernorat</dt><dd><a class="link" [routerLink]="['/gouvernorat', p.gov.slug]">{{ p.gov.name }}</a></dd></div>
+          @if (p.hours) { <div><dt>🕐 Horaires</dt><dd>{{ p.hours }}@if (p.closedDay >= 0 && p.closedDay != null) {<small> · fermé le {{ days[p.closedDay] }}</small>}</dd></div> }
+          @if (p.address) { <div><dt>🏠 Adresse</dt><dd>{{ p.address }}</dd></div> }
+          @if (d.dishes.length > 0) { <div class="facts__wide"><dt>🍽 À goûter</dt><dd>{{ dishList(d.dishes) }}</dd></div> }
+        </dl>
+        <h2 class="h-sm" style="margin: 1.4rem 0 .5rem">Retrouver ce lieu</h2>
+        <faza-social [place]="p" />
+        <p class="muted small" style="margin-top: .6rem">Les liens « recherche » s’affichent tant que la page officielle n’est pas renseignée : on n’invente jamais d’adresse.</p>
+      </div>
+    </div>
+
+    <section style="margin-top: 2.5rem">
+      <h2 class="h-md">Localisation</h2>
+      <p class="muted" style="margin: .3rem 0 .8rem">{{ precLabel[p.precision] }}. @if (osm()) {<a class="link" [href]="osm()" target="_blank" rel="noopener noreferrer">Ouvrir dans OpenStreetMap</a>}</p>
+      <faza-place-map [places]="[p]" [single]="true" [height]="380" />
+    </section>
+
+    <section class="reviews">
+      <h2 class="h-md">Avis de la communauté</h2>
+      @if (auth.user()) {
+        <form (submit)="submit($event)" class="revform" ngNativeValidate>
+          <fieldset class="stars-in"><legend class="sr-only">Note</legend>
+            @for (i of stars; track i) { <button type="button" [attr.aria-pressed]="rating() >= i" [attr.aria-label]="i + ' sur 5'" [class.on]="rating() >= i" (click)="rating.set(i)">★</button> }
+          </fieldset>
+          <textarea class="textarea" name="text" required minlength="5" maxlength="600" [(ngModel)]="text" placeholder="Raconte ta visite : ce qui t’a plu, le prix payé, un conseil…"></textarea>
+          <div class="revform__row">
+            <label class="btn btn--ghost btn--sm">📷 {{ photo() ? "Photo ajoutée ✓" : "Ajouter une photo" }}<input type="file" accept="image/*" hidden (change)="pick($event)" /></label>
+            <button class="btn btn--dark" [disabled]="busy()">{{ busy() ? "Envoi…" : "Publier mon avis" }}</button>
+          </div>
+          @if (err()) { <p class="form-error" role="alert">{{ err() }}</p> }
+        </form>
+      } @else {
+        <p class="notice"><a class="link" routerLink="/connexion">Connecte-toi</a> pour laisser un avis ou une photo.</p>
+      }
+      @if (d.reviews.length === 0) {
+        <faza-empty-door title="Pas encore d’avis">Sois la première personne à raconter ta visite : +5 points, et +3 avec une photo.</faza-empty-door>
+      } @else {
+        @for (r of d.reviews; track r.id) {
+          <article class="rev"><div><b>{{ r.author }}</b> <faza-stars [value]="r.rating" /> <span class="muted small">{{ date(r.created_at) }}</span></div><p>{{ r.text }}</p>@if (r.photo) {<img [src]="r.photo" alt="Photo de l’avis" loading="lazy" />}</article>
+        }
+      }
+    </section>
+
+    @if (near().length > 0) {
+      <section class="nearby">
+        <p class="eyebrow">Dans le même coin</p>
+        <div class="section__head" style="margin-bottom: 1.2rem">
+          <h2 class="h-md">À faire aussi à {{ p.gov.name }}</h2>
+          <a class="btn btn--ghost btn--sm" [routerLink]="['/gouvernorat', p.gov.slug]">Tout {{ p.gov.name }}</a>
+        </div>
+        <div class="grid3">@for (x of near(); track x.id) { <article fazaPlaceCard [place]="x"></article> }</div>
+      </section>
+    }
+  </div>
+}

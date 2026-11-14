@@ -1,0 +1,117 @@
+<section class="hero">
+  <div class="wrap hero__grid">
+    <div class="hero__txt">
+      <p class="hero__def"><span class="hero__dot" aria-hidden="true"></span> 24 gouvernorats · une seule question : on sort où ?</p>
+      <h1 class="h-xl">La Tunisie <span class="hero__nw">à ta façon.</span></h1>
+      <p class="lead">Dis-nous l’ambiance du moment : la carte s’allume là où elle t’attend. Puis clique, on s’occupe du reste.</p>
+
+      <div class="moods" role="group" aria-label="Choisis une ambiance">
+        @for (m of moods; track m.id) {
+          <button class="mood" [attr.aria-pressed]="mood() === m.id" (click)="setMood(m.id)">
+            {{ m.label }}<span class="ar" lang="ar">{{ m.ar }}</span>
+          </button>
+        }
+      </div>
+
+      <div class="hero__cta">
+        <button class="btn btn--terra" (click)="surprise()">🎲 Surprends-moi</button>
+        <a class="btn btn--ghost on-dark" routerLink="/mix">Créer mon programme</a>
+      </div>
+    </div>
+
+    <div class="hero__map" #mapBox>
+      <faza-tunisia-map [values]="values()" [selected]="spin() || current()" [hovered]="hov()" [interactive]="true"
+        (pick)="sel.set($event)" (hover)="onHover($event)" [labels]="true" [dimOthers]="true" />
+      @if (tip(); as t) {
+        @if (bySlug()[t.slug]; as g) {
+          <div class="maptip" [style.left.px]="t.x" [style.top.px]="t.y">
+            <strong>{{ g.name }}</strong> <span class="ar" lang="ar">{{ g.nameAr }}</span>
+            <small>{{ g.total }} lieux · {{ g.events }} événements</small>
+          </div>
+        }
+      }
+      <div class="legend" aria-hidden="true"><span>moins</span><i></i><span>plus d’idées « {{ moodLabel() }} »</span></div>
+    </div>
+
+    @if (gov(); as g) {
+      <aside class="ticket" aria-live="polite">
+        <div class="ticket__scene"><svg fazaScene [type]="g.scene" [seed]="g.slug"></svg></div>
+        <div class="ticket__body">
+          <p class="ticket__reg">{{ g.region }}</p>
+          <h2 class="h-md">{{ g.name }} <span class="ar" lang="ar">{{ g.nameAr }}</span></h2>
+          <p class="muted">{{ g.tagline }}</p>
+          <ul class="ticket__counts">
+            @for (r of rubriques; track r.id) { <li><b>{{ g.counts[r.id] }}</b> {{ countLabel(r.fr) }}</li> }
+            <li><b>{{ g.events }}</b> événements</li>
+          </ul>
+          <a class="btn btn--dark btn--block" [routerLink]="['/gouvernorat', g.slug]">Ouvrir {{ g.name }}</a>
+        </div>
+      </aside>
+    }
+  </div>
+</section>
+
+<faza-marquee />
+
+<section class="section doors-sec">
+  <div class="wrap">
+    @if (govsF.data(); as govs) { <faza-stats [govs]="govs" /> }
+    <div class="section__head">
+      <div><p class="eyebrow">Les rubriques</p><h2 class="h-lg">Pousse une porte</h2><p class="muted" style="margin-top: .4rem">Six portes, six façons de découvrir le pays. Chaque porte s’ouvre sur une rubrique.</p></div>
+    </div>
+    <div class="doors">
+      @for (d of doors; track d.name; let i = $index) {
+        <a [routerLink]="d.to" [queryParams]="d.q" class="door" [style.--c]="d.color" [style.--d]="i * 70 + 'ms'">
+          <span class="door__arch">
+            <span class="door__studs">@for (k of studs; track $index) {<i></i>}</span>
+            <span class="door__ar ar" lang="ar">{{ d.ar }}</span>
+          </span>
+          <span class="door__name">{{ d.name }}</span>
+          <span class="door__fr">{{ d.fr }}</span>
+        </a>
+      }
+    </div>
+  </div>
+</section>
+
+<faza-mix-teaser [gov]="gov()" [mood]="mood()" />
+
+<section class="section">
+  <div class="wrap">
+    <div class="section__head">
+      <div><p class="eyebrow">Agenda</p><h2 class="h-lg">{{ news.name }} <span class="ar" lang="ar">{{ news.ar }}</span></h2><p class="muted">Les prochains rendez-vous. Dates indicatives : on vérifie avant de partir.</p></div>
+      <a class="btn btn--ghost" routerLink="/jaw-tounsna">Tout voir</a>
+    </div>
+    <div class="evgrid evgrid--t">
+      @for (e of (eventsF.data() || []).slice(0, 4); track e.id) { <a fazaEventTicket [e]="e" routerLink="/jaw-tounsna" [compact]="true"></a> }
+    </div>
+  </div>
+</section>
+
+<section class="section gems">
+  <div class="wrap">
+    <div class="section__head">
+      <div><p class="eyebrow">Cartes postales</p><h2 class="h-lg">{{ gems.name }} <span class="ar" lang="ar">{{ gems.ar }}</span></h2><p class="muted">Les adresses que les guides oublient, envoyées comme des cartes postales.</p></div>
+      <a class="btn btn--ghost" routerLink="/explorer" [queryParams]="{ gem: 1 }">Toutes les pépites</a>
+    </div>
+    <div class="postcards">
+      @for (p of (gemsF.data() || []).slice(0, 3); track p.id; let i = $index) { <a fazaPostcard [place]="p" [i]="i" [routerLink]="['/lieu', p.slug]"></a> }
+    </div>
+  </div>
+</section>
+
+<faza-dico />
+
+<section class="section" style="padding-top: 0">
+  <div class="wrap">
+    <div class="callout">
+      <svg fazaZellige [opacity]="0.14"></svg>
+      <span class="callout__ar ar" lang="ar" aria-hidden="true">بلاصة</span>
+      <div>
+        <h2 class="h-lg">T’as un secret spot ?</h2>
+        <p>Un café caché dans la médina, une crique sans touristes, un resto où la ojja est parfaite : partage-la. L’équipe vérifie, la communauté te remercie (et tu gagnes 20 points).</p>
+      </div>
+      <a class="btn" routerLink="/communaute/proposer">Proposer une adresse</a>
+    </div>
+  </div>
+</section>

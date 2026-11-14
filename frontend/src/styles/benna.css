@@ -52,7 +52,7 @@ i.ok { color: var(--ok); font-style: normal; font-weight: 700; } i.ko { color: v
 @keyframes sheet-in { from { transform: translateX(30px); opacity: 0; } }
 .sheet__h { position: relative; padding: 1.1rem 1.2rem .8rem; background: linear-gradient(135deg, var(--a, #f3d9c6), var(--b, #fff)); display: grid; gap: .4rem; }
 .sheet__h p { font-size: .9rem; } .sheet__v { font-family: "Caveat", cursive; font-size: 1.25rem; line-height: 1.1; color: #3b2d1d; }
-.sheet__x { position: absolute; right: .7rem; top: .7rem; width: 2.2rem; height: 2.2rem; border-radius: 50%; border: 0; background: rgba(255,255,255,.85); font-weight: 800; }
+.sheet__x { position: absolute; z-index: 2; right: .7rem; top: .7rem; width: 2.2rem; height: 2.2rem; border-radius: 50%; border: 0; background: rgba(255,255,255,.85); font-weight: 800; }
 .sheet .tabs { margin: 0; padding: 0 .6rem; } .sheet .tabs button { padding: .6rem .7rem; }
 .sheet__b { padding: 1rem 1.2rem; overflow-y: auto; flex: 1; display: grid; gap: .8rem; align-content: start; }
 .sheet__f { padding: .8rem 1.2rem 1rem; border-top: 1px solid var(--line); }

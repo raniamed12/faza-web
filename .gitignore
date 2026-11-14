@@ -1,7 +1,7 @@
 node_modules
 dist
-server/data/*.db*
-server/data/uploads/*
-!server/data/uploads/.gitkeep
+.angular
+backend/data/*.db*
+backend/data/uploads/*
+!backend/data/uploads/.gitkeep
 .env
- 

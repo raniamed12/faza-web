@@ -48,13 +48,13 @@ Le site s’organise en **rubriques**, chacune nommée en derja :
 
 ## 2. Lancer le projet en local
 
-**Prérequis :** Node.js **20 ou plus** (testé jusqu’à Node 24) et npm.
+**Prérequis :** Node.js **20.19 ou plus** (exigé par Angular 22) (testé jusqu’à Node 24) et npm.
 
 ```bash
 # 1. À la racine du projet : installe l’outil qui lance les deux serveurs
 npm install
 
-# 2. Installe les dépendances du serveur et du client
+# 2. Installe les dépendances du serveur (backend) et du site Angular (frontend)
 npm run install:all
 
 # 3. Lance l’API et le site en même temps
@@ -72,7 +72,7 @@ npm run dev
 | `npm run dev` | Lance l’API (port 4000) et le site (port 5173) avec rechargement automatique |
 | `npm run seed` | Réinitialise la base avec les données de démonstration |
 | `npm test` | Lance les tests automatiques du back end |
-| `npm run build` | Produit la version de production du site dans `client/dist` |
+| `npm run build` | Produit la version de production du site dans `frontend/dist` |
 
 ### Compte de démonstration
 
@@ -80,11 +80,11 @@ npm run dev
 |---|---|---|
 | Administrateur | `admin@faza.tn` | `Faza2026!` |
 
-Pour changer ces identifiants ou la clé secrète JWT, copiez `server/.env.example` vers `server/.env` et modifiez les valeurs.
+Pour changer ces identifiants ou la clé secrète JWT, copiez `backend/.env.example` vers `backend/.env` et modifiez les valeurs.
 
 ### En cas de problème
 - **Le site s’affiche mais reste vide :** l’API ne tourne pas. Vérifiez dans le terminal que la ligne `api` ne montre pas d’erreur.
-- **Erreur `better-sqlite3` à l’installation :** vérifiez votre version avec `node -v` (il faut Node 20 ou plus), puis relancez `npm run install:all`.
+- **Erreur `better-sqlite3` à l’installation :** vérifiez votre version avec `node -v` (il faut Node 20.19 ou plus), puis relancez `npm run install:all`.
 - **Les cartes sont grises :** les tuiles OpenStreetMap ont besoin d’une connexion Internet.
 
 ---
@@ -121,7 +121,7 @@ Toutes les pages dynamiques lisent leurs données depuis l’API : rien n’est 
 
 ## 4. FAZA MIX : comment le programme est calculé
 
-FAZA MIX **n’utilise pas d’IA**. C’est un algorithme à règles simples, lisible et reproductible, codé dans `server/src/mix.js`.
+FAZA MIX **n’utilise pas d’IA**. C’est un algorithme à règles simples, lisible et reproductible, codé dans `backend/src/mix.js`.
 
 **Entrées :** gouvernorat, budget par personne (10 à 2000 DT), durée (1 à 3 jours), taille du groupe (1 à 12 personnes) et envies (nature, culture, gastronomie, sport, détente, mer, désert).
 
@@ -139,15 +139,15 @@ L’aléa vient d’un générateur pseudo-aléatoire à **graine** : avec la m�
 ## 5. Architecture et choix techniques
 
 ```
- Navigateur (React)  ──HTTP/JSON──▶  API Express (Node.js)  ──SQL──▶  SQLite (fichier faza.db)
-   localhost:5173      /api/...         localhost:4000                server/data/faza.db
+ Navigateur (Angular)──HTTP/JSON──▶  API Express (Node.js)  ──SQL──▶  SQLite (fichier faza.db)
+   localhost:5173      /api/...         localhost:4000                backend/data/faza.db
 ```
 
 | Couche | Choix | Pourquoi |
 |---|---|---|
-| Front end | **React 18 + Vite + React Router 6** | Composants réutilisables, navigation sans rechargement, build rapide |
+| Front end | **Angular 22** (composants autonomes, signals, Angular Router, HttpClient) | Composants réutilisables, navigation sans rechargement, chargement des pages à la demande, build rapide (esbuild) |
 | Cartes | **Leaflet + OpenStreetMap**, plus une carte SVG des 24 gouvernorats (geoBoundaries, CC BY 4.0) | Position exacte des lieux, gratuit, sans clé d’API |
-| Back end | **Node.js + Express** | Même langage que le front, API REST simple |
+| Back end | **Node.js + Express** | Même écosystème que le front (JavaScript / TypeScript), API REST simple |
 | Base de données | **SQLite** via better-sqlite3 | Aucun serveur à installer : toute la base tient dans un fichier |
 | Authentification | **bcryptjs + JWT** (valable 7 jours) | Mots de passe hachés, sessions sans état côté serveur |
 | Style | CSS pur (sans framework), polices auto-hébergées (Fontsource) | Identité visuelle propre : motifs zellige, couleurs de la Tunisie, typographie arabe et latine |
@@ -209,7 +209,7 @@ Toutes les routes commencent par `/api`. 🔒 = connexion requise, 👑 = admini
 
 ## 7. Base de données
 
-La base SQLite compte **13 tables**, créées dans `server/src/db.js` et remplies par `server/src/seed.js` :
+La base SQLite compte **13 tables**, créées dans `backend/src/db.js` et remplies par `backend/src/seed.js` :
 
 - **Comptes :** `users` (rôle utilisateur ou admin, points et badges).
 - **Catalogue :** `governorates`, `places` (catégorie, prix, tags, coordonnées, précision, réseaux sociaux, statut de modération), `events`.
@@ -245,7 +245,7 @@ FAZA ne prétend pas à une exactitude qu’il n’a pas :
 - 📅 **Prix et dates** sont indicatifs. Les événements non confirmés portent la mention « date à confirmer ».
 - 🖼️ **Photos :** une illustration est affichée par défaut. On ajoute une vraie photo avec le champ `image`.
 
-**Pour remplacer les données :** modifiez `server/src/data/places.js` (et `benna.js` pour Benna), puis lancez `npm run seed`. Pour chaque lieu, renseignez `lat`, `lng`, `address`, `instagram`, `facebook` et `image`.
+**Pour remplacer les données :** modifiez `backend/src/data/places.js` (et `benna.js` pour Benna), puis lancez `npm run seed`. Pour chaque lieu, renseignez `lat`, `lng`, `address`, `instagram`, `facebook` et `image`.
 
 ---
 
@@ -253,8 +253,8 @@ FAZA ne prétend pas à une exactitude qu’il n’a pas :
 
 | Partie | Hébergeur | Configuration |
 |---|---|---|
-| Site (front end) | **Netlify** : https://faza-tunisie.netlify.app/ | `netlify.toml` construit `client/` et publie `client/dist` |
-| API (back end) | **Render** | Service Node dont la racine est `server/`, lancé avec `npm start` |
+| Site (front end) | **Netlify** : https://faza-tunisie.netlify.app/ | `netlify.toml` construit `frontend/` et publie `frontend/dist` |
+| API (back end) | **Render** | Service Node dont la racine est `backend/`, lancé avec `npm start` |
 
 Netlify redirige `/api/*` et `/uploads/*` vers l’API hébergée sur Render. Le front appelle donc toujours `/api/...`, en local comme en production, sans changer de code.
 
@@ -266,7 +266,7 @@ Netlify redirige `/api/*` et `/uploads/*` vers l’API hébergée sur Render. Le
 faza/
 ├── package.json            Scripts racine (dev, seed, test, build)
 ├── netlify.toml            Déploiement du front
-├── server/                 API Express
+├── backend/                API Express
 │   ├── .env.example        Variables d’environnement (port, JWT, admin)
 │   ├── src/
 │   │   ├── index.js        Démarrage du serveur et branchement des routes
@@ -277,15 +277,20 @@ faza/
 │   │   ├── routes/         auth · catalog · me · community
 │   │   └── data/           governorates · places · events · benna
 │   └── test/               Tests de l’API (node --test)
-└── client/                 Site React
-    ├── public/benna/       Images des plats
+└── frontend/               Site Angular
+    ├── angular.json        Configuration du build (styles, polices, sortie dans dist/)
+    ├── proxy.conf.json     En local, /api et /uploads sont redirigés vers l’API (port 4000)
+    ├── public/             Favicon, images des plats (benna/), icônes Leaflet
     └── src/
-        ├── App.jsx         Routes de l’application
-        ├── api.js          Appels à l’API
-        ├── context.jsx     Utilisateur connecté, notifications, useFetch
-        ├── pages/          Une page par écran
-        ├── components/     Cartes, cartes de lieux, décor (zellige, tickets…)
-        ├── benna/          Le carnet gourmand
-        ├── lib/            Libellés, formats, liens réseaux sociaux
-        └── styles/         base · components · pages · benna · deco
+        ├── styles/         base · components · pages · benna · deco
+        └── app/
+            ├── app.ts            Squelette : en-tête, pages, pied de page, notifications
+            ├── app.routes.ts     Routes de l’application (pages chargées à la demande)
+            ├── app.config.ts     Routeur, HttpClient et intercepteur du jeton JWT
+            ├── core/             ApiService, AuthService (+ garde de route), ToastService, fetchData
+            ├── pages/            Une page par écran
+            ├── components/       Cartes (SVG et Leaflet), cartes de lieux, décor (zellige, billets…)
+            ├── benna/            Le carnet gourmand
+            ├── data/             Carte des gouvernorats, plan de Tunis, images des plats
+            └── lib/              Libellés, formats, liens réseaux sociaux
 ```
