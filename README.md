@@ -1,7 +1,6 @@
 # FAZA — فازة · La Tunisie à ta façon
 
- (front end complet + back end minimal avec authentification).
-Equipe: Rania Mediouni, Nour Elhadj. Cours : Dr. Maroua Nouioua.
+Equipe: Rania Mediouni, Nour Elhadj.
 
 ## 1. Le site en bref
 Guide collaboratif de la Tunisie : dormir (**Win nbatou ?**), manger (**Benna**), sortir (**Win nemchiw ?**),
