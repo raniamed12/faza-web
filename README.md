@@ -1,6 +1,7 @@
 # FAZA — فازة · La Tunisie à ta façon
 
 Equipe: Rania Mediouni, Nour Elhadj.
+lien netlify : https://faza-tunisie.netlify.app/
 
 ## 1. Le site en bref
 Guide collaboratif de la Tunisie : dormir (**Win nbatou ?**), manger (**Benna**), sortir (**Win nemchiw ?**),
