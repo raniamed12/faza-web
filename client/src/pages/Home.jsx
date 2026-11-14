@@ -22,12 +22,12 @@ const MOODS = [
 ];
 
 const DOORS = [
-  { to: "/explorer?rub=sleep", name: "Win nbatou ?", ar: "وين نبيتو؟", fr: "Où dormir", color: "#17497A", studs: 9 },
-  { to: "/benna", name: "Benna", ar: "بنّة", fr: "Où manger", color: "#D62839", studs: 9 },
-  { to: "/explorer?rub=do", name: "Win nemchiw ?", ar: "وين نمشيو؟", fr: "Que faire", color: "#C65D3B", studs: 9 },
-  { to: "/explorer?rub=discover", name: "Lakta", ar: "لقطة", fr: "Que découvrir", color: "#0E2F4F", studs: 9 },
-  { to: "/jaw-tounsna", name: "Jaw Tounsna", ar: "جو تونسنا", fr: "Quoi de neuf", color: "#2F6B55", studs: 9 },
-  { to: "/explorer?gem=1", name: "Blayes mkhabbya", ar: "بلايص مخبّية", fr: "Les pépites", color: "#8B5A2B", studs: 9 },
+  { to: "/explorer?rub=sleep", name: "Win nbatou ?", ar: "وين نبيتو؟", fr: "Où dormir ?", color: "#17497A", studs: 9 },
+  { to: "/benna", name: "Benna", ar: "بنّة", fr: "Où manger ?", color: "#D62839", studs: 9 },
+  { to: "/explorer?rub=do", name: "Win nemchiw ?", ar: "وين نمشيو؟", fr: "Que faire ?", color: "#C65D3B", studs: 9 },
+  { to: "/explorer?rub=discover", name: "Lakta", ar: "لقطة", fr: "Que découvrir ?", color: "#0E2F4F", studs: 9 },
+  { to: "/jaw-tounsna", name: "Jaw Tounsna", ar: "جو تونسنا", fr: "Quoi de neuf ?", color: "#2F6B55", studs: 9 },
+  { to: "/explorer?gem=1", name: "Secret spot", ar: "بلايص مخبّية", fr: "Les pépites", color: "#8B5A2B", studs: 9 },
 ];
 
 export default function Home() {
@@ -75,7 +75,7 @@ export default function Home() {
       <section className="hero">
         <div className="wrap hero__grid">
           <div className="hero__txt">
-            <p className="hero__def"><span className="ar" lang="ar">فازة</span> <b>fazza</b> <i>n. f.</i> — la vibe du moment, l’envie soudaine de bouger.</p>
+            <p className="hero__def"><span className="hero__dot" aria-hidden="true" /> 24 gouvernorats · une seule question : on sort où ?</p>
             <h1 className="h-xl">La Tunisie <span className="hero__nw">à ta façon.</span></h1>
             <p className="lead">Dis-nous l’ambiance du moment : la carte s’allume là où elle t’attend. Puis clique, on s’occupe du reste.</p>
 
@@ -112,7 +112,7 @@ export default function Home() {
                 <h2 className="h-md">{gov.name} <span className="ar" lang="ar">{gov.nameAr}</span></h2>
                 <p className="muted">{gov.tagline}</p>
                 <ul className="ticket__counts">
-                  {RUBRIQUES.map((r) => <li key={r.id}><b>{gov.counts[r.id]}</b> {r.fr.toLowerCase()}</li>)}
+                  {RUBRIQUES.map((r) => <li key={r.id}><b>{gov.counts[r.id]}</b> {r.fr.replace(" ?", "").toLowerCase()}</li>)}
                   <li><b>{gov.events}</b> événements</li>
                 </ul>
                 <Link className="btn btn--dark btn--block" to={`/gouvernorat/${gov.slug}`}>Ouvrir {gov.name}</Link>
@@ -177,7 +177,7 @@ export default function Home() {
             <Zellige opacity={0.14} />
             <span className="callout__ar ar" lang="ar" aria-hidden="true">بلاصة</span>
             <div>
-              <h2 className="h-lg">T’as une blassa mkhabbya ?</h2>
+              <h2 className="h-lg">T’as un secret spot ?</h2>
               <p>Un café caché dans la médina, une crique sans touristes, un resto où la ojja est parfaite : partage-la. L’équipe vérifie, la communauté te remercie (et tu gagnes 20 points).</p>
             </div>
             <Link className="btn" to="/communaute/proposer">Proposer une adresse</Link>

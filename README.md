@@ -5,7 +5,7 @@ Equipe: Rania Mediouni, Nour Elhadj. Cours : Dr. Maroua Nouioua.
 
 ## 1. Le site en bref
 Guide collaboratif de la Tunisie : dormir (**Win nbatou ?**), manger (**Benna**), sortir (**Win nemchiw ?**),
-découvrir (**لقطة / Lakta**), les événements (**جو تونسنا / Jaw Tounsna**), les pépites cachées (**Blayes mkhabbya**),
+découvrir (**لقطة / Lakta**), les événements (**جو تونسنا / Jaw Tounsna**), les pépites cachées (**Secret spot**),
 un générateur de programmes selon le budget (**FAZA MIX**) et une communauté qui propose des lieux.
 
 ## 2. Choix techniques
@@ -34,7 +34,7 @@ Compte administrateur de démonstration : `admin@faza.tn` / `Faza2026!` (à chan
 ## 4. Fonctionnalités (par page)
 - **Accueil** : carte vivante de la Tunisie. On choisit une ambiance (mer, désert, culture…), les gouvernorats s’éclairent selon leurs vrais lieux ; un clic ouvre le « billet » du gouvernorat ; « Surprends-moi » tire un gouvernorat ; six portes tunisiennes mènent aux rubriques ; un aperçu FAZA MIX se recalcule en direct avec le budget.
 - **Explorer** : filtres rubrique / gouvernorat (liste ou clic sur la carte) / budget / recherche / pépites ; vue liste ou carte Leaflet.
-- **Gouvernorat** : une page par gouvernorat avec onglets Win nbatou, Benna, Win nemchiw, Lakta, Jaw Tounsna, Blayes mkhabbya.
+- **Gouvernorat** : une page par gouvernorat avec onglets Win nbatou, Benna, Win nemchiw, Lakta, Jaw Tounsna, Secret spot.
 - **Fiche lieu** : photo ou illustration, carte avec la position, boutons **Localisation / Instagram / Facebook / Itinéraire**, avis, photos, favoris.
 - **Benna** : le carnet gourmand (plats en autocollants sur 6 pages, tourner les pages) + plan de Tunis dessiné (glisser, zoomer, épingles) + fiche d’adresse (menu, photos, avis, infos, ouvert/fermé selon l’heure).
 - **FAZA MIX** : budget, durée, groupe, envies → programme jour par jour, remplacement d’étapes, total recalculé, enregistrement, partage par lien. Algorithme à règles (pas d’IA), reproductible.

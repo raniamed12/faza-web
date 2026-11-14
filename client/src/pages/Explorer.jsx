@@ -31,7 +31,7 @@ export default function Explorer() {
     <>
     <PageHead tone={gem ? "vert" : "bleu"} kicker={gem ? "Les pépites du coin" : "La carte des envies"}
       title={gem ? GEMS.name : rubInfo ? rubInfo.name : "Explorer la Tunisie"} ar={gem ? GEMS.ar : rubInfo ? rubInfo.ar : "تونس"}
-      sub={gem ? "Les adresses que les guides oublient, repérées par celles et ceux qui connaissent le coin." : rubInfo ? `${rubInfo.fr}, partout en Tunisie. Filtre par gouvernorat ou budget, puis ouvre la carte.` : "Filtre par rubrique, gouvernorat ou budget. Chaque lieu a sa localisation et ses pages Instagram / Facebook."} />
+      sub={gem ? "Les adresses que les guides oublient, repérées par celles et ceux qui connaissent le coin." : rubInfo ? `${rubInfo.fr.replace(" ?", "")}, partout en Tunisie. Filtre par gouvernorat ou budget, puis ouvre la carte.` : "Filtre par rubrique, gouvernorat ou budget. Chaque lieu a sa localisation et ses pages Instagram / Facebook."} />
     <div className="wrap section explorer">
 
       <div className="explorer__grid">

@@ -39,7 +39,7 @@ export default function Governorate() {
             <h1 className="h-xl">{g.name} <span className="ar" lang="ar">{g.nameAr}</span></h1>
             <p className="lead">{g.tagline}</p>
             <ul className="ghero__counts">
-              {TABS.map((t) => <li key={t.id}><b>{count(t.id)}</b> {t.id === "news" ? "événements" : t.id === "gems" ? "pépites" : t.fr.toLowerCase()}</li>)}
+              {TABS.map((t) => <li key={t.id}><b>{count(t.id)}</b> {t.id === "news" ? "événements" : t.id === "gems" ? "pépites" : t.fr.replace(" ?", "").toLowerCase()}</li>)}
             </ul>
             <div className="hero__cta">
               <Link className="btn btn--terra" to={`/mix?gov=${g.slug}`}>Mon programme à {g.name}</Link>

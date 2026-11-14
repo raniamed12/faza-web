@@ -124,11 +124,9 @@ a.evt:hover { transform: translateY(-4px) rotate(-.4deg); box-shadow: 0 1px 0 va
 .eyebrow { display: inline-flex; align-items: center; gap: .5rem; font-weight: 800; font-size: .8rem; letter-spacing: .12em; text-transform: uppercase; color: var(--terra-2); margin-bottom: .5rem; }
 .eyebrow::before { content: "✦"; color: var(--rouge); letter-spacing: 0; }
 
-/* Accueil : définition du mot « fazza » */
-.hero__def { justify-self: start; display: inline-flex; flex-wrap: wrap; align-items: baseline; gap: .45rem; background: rgba(234,217,181,.1); border: 1.5px dashed rgba(234,217,181,.45); border-radius: 14px; padding: .45rem .9rem; color: rgba(250,245,234,.9); font-size: .95rem; transform: rotate(-1.2deg); max-width: 32rem; }
-.hero__def .ar { font-size: 1.7rem; color: var(--sable); line-height: 1; }
-.hero__def b { font-family: var(--font-display); font-size: 1.2rem; color: #fff; }
-.hero__def i { color: var(--terraL, #e39a78); font-size: .85rem; }
+/* Accueil : accroche au-dessus du titre */
+.hero__def { justify-self: start; display: inline-flex; align-items: center; gap: .6rem; background: rgba(255,255,255,.08); border: 1.5px solid rgba(234,217,181,.35); border-radius: 999px; padding: .4rem 1rem .4rem .8rem; color: var(--sable-2); font-weight: 700; font-size: .95rem; letter-spacing: .01em; }
+.hero__dot { width: .6rem; height: .6rem; border-radius: 50%; background: var(--rouge); box-shadow: 0 0 0 4px rgba(214,40,57,.25); animation: pulse 1.6s infinite; }
 
 /* Jaw Tounsna */
 .countdown { background: #fffdf6; color: var(--ink); border-radius: 18px; padding: 1rem 1.3rem 1.1rem; display: grid; gap: .15rem; min-width: 15rem; max-width: 19rem; transform: rotate(2deg); box-shadow: 0 18px 30px -16px rgba(0,0,0,.45); border-top: 8px solid var(--bleu); }

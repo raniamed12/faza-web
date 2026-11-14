@@ -75,7 +75,6 @@ export const Footer = () => (
         <div><h4>Compte</h4><Link to="/connexion">Connexion</Link><Link to="/inscription">Inscription</Link><Link to="/mon-espace">Mon espace</Link></div>
       </div>
       <div className="footer__note">
-        <span>Projet web — Objectif 3 · Rania Mediouni &amp; Nour Elhadj</span>
         <span>Prix et dates indicatifs. Carte © OpenStreetMap, frontières geoBoundaries (CC BY 4.0).</span>
       </div>
     </div>

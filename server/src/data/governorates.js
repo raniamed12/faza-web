@@ -53,8 +53,8 @@ export const GOVERNORATES = [
 
 // Les rubriques de FAZA, nommées en dialecte tunisien.
 export const CATEGORIES = [
-  { id: "sleep", label: "Win nbatou ?", ar: "وين نبيتو؟", fr: "Où dormir" },
-  { id: "eat", label: "Benna", ar: "بنّة", fr: "Où manger" },
-  { id: "do", label: "Win nemchiw ?", ar: "وين نمشيو؟", fr: "Que faire" },
-  { id: "discover", label: "Lakta", ar: "لقطة", fr: "Que découvrir" },
+  { id: "sleep", label: "Win nbatou ?", ar: "وين نبيتو؟", fr: "Où dormir ?" },
+  { id: "eat", label: "Benna", ar: "بنّة", fr: "Où manger ?" },
+  { id: "do", label: "Win nemchiw ?", ar: "وين نمشيو؟", fr: "Que faire ?" },
+  { id: "discover", label: "Lakta", ar: "لقطة", fr: "Que découvrir ?" },
 ];

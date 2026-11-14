@@ -176,7 +176,7 @@ export const PLACES = [
   ["kebili", "eat", "Pain sous le sable (mella)", "Pain cuit sous la braise et le sable, avec méchoui et thé.", ["gastronomie", "desert"], 15, 33.4567, 9.0214, "ville", "food"],
 ];
 
-// Pépites proposées par l’équipe FAZA (lieux mis en avant dans « Blayes mkhabbya »).
+// Pépites proposées par l’équipe FAZA (lieux mis en avant dans « Secret spot »).
 // Elles désignent des lieux déjà présents ci-dessus (par leur nom).
 export const TEAM_GEMS = [
   "Takrouna, village berbère perché",

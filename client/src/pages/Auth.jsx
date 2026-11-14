@@ -53,7 +53,7 @@ export default function Auth({ mode }) {
           <ul>
             <li>♡ Garde tes adresses favorites</li>
             <li>✦ Enregistre et partage tes programmes</li>
-            <li>📍 Propose tes blayes mkhabbya</li>
+            <li>📍 Propose tes secret spots</li>
           </ul>
         </div>
       </aside>
